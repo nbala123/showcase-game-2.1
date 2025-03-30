@@ -1,0 +1,144 @@
+[gd_scene load_steps=9 format=3 uid="uid://ocqr0n2tki02"]
+
+[ext_resource type="Script" uid="uid://cfedqb1behyah" path="res://Scripts/popup.gd" id="1_iehfh"]
+[ext_resource type="FontFile" uid="uid://cynm5jkabqkef" path="res://Assets/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="1_rexqp"]
+[ext_resource type="Texture2D" uid="uid://0fqw8qtmnb6n" path="res://Assets/Items/key.png" id="2_3k3yq"]
+[ext_resource type="AudioStream" uid="uid://b4wkgtd8ntw0y" path="res://Assets/audio/coin01.wav" id="4_sjbsn"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_putqk"]
+bg_color = Color(0.105882, 0.0980392, 0.141176, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0.113725, 0.105882, 0.14902, 1)
+shadow_size = 8
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="Animation" id="Animation_6emxk"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(309.5, 625)]
+}
+
+[sub_resource type="Animation" id="Animation_whdx8"]
+resource_name = "enter"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(309.5, 625), Vector2(309.5, 530)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_512po"]
+_data = {
+&"RESET": SubResource("Animation_6emxk"),
+&"enter": SubResource("Animation_whdx8")
+}
+
+[node name="popup" type="CanvasLayer"]
+script = ExtResource("1_iehfh")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 309.5
+offset_top = 625.0
+offset_right = 842.5
+offset_bottom = 715.0
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(300, 62)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_putqk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 102.0
+offset_top = 5.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = -7
+
+[node name="header" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_rexqp")
+theme_override_font_sizes/normal_font_size = 24
+text = "Item Obtained:"
+fit_content = true
+scroll_active = false
+
+[node name="item" type="RichTextLabel" parent="Panel/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("1_rexqp")
+theme_override_font_sizes/normal_font_size = 80
+text = "A Golden Key"
+fit_content = true
+scroll_active = false
+
+[node name="item_image" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = 12.5
+offset_top = 7.0
+offset_right = 87.5
+offset_bottom = 82.0
+texture = ExtResource("2_3k3yq")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_512po")
+}
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_sjbsn")

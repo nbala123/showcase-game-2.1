@@ -1,0 +1,133 @@
+[gd_scene load_steps=10 format=3 uid="uid://bkrjmb3psejf7"]
+
+[ext_resource type="Texture2D" uid="uid://lk772c8356kw" path="res://Assets/Signs/large-sign.png" id="1_lmvrw"]
+[ext_resource type="Script" uid="uid://d4e7mx8jmxonm" path="res://Scripts/reading.gd" id="1_onold"]
+[ext_resource type="FontFile" uid="uid://cynm5jkabqkef" path="res://Assets/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="2_o5jff"]
+[ext_resource type="Theme" uid="uid://dhqs8ewtjndrv" path="res://Scenes/sign.tres" id="3_0denr"]
+[ext_resource type="AudioStream" uid="uid://ba2bf1v67fvkd" path="res://Assets/audio/qubodup-wobble1.wav" id="4_ftxyc"]
+[ext_resource type="AudioStream" uid="uid://b1ix0ij8t0dk2" path="res://Assets/audio/qubodup-wobble2.wav" id="5_318gk"]
+
+[sub_resource type="Animation" id="Animation_iyt8o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(246, 375)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_63l1i"]
+resource_name = "enter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(246, 375), Vector2(246, 160)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5ga3"]
+_data = {
+&"RESET": SubResource("Animation_iyt8o"),
+&"enter": SubResource("Animation_63l1i")
+}
+
+[node name="reading" type="CanvasLayer"]
+script = ExtResource("1_onold")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -330.0
+offset_top = -273.0
+offset_right = 330.0
+offset_bottom = 181.0
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(1.25, 1.25)
+pivot_offset = Vector2(330, 400)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("1_lmvrw")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = 76.0
+offset_right = -20.0
+offset_bottom = -76.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="TextureRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_0denr")
+theme_override_colors/default_color = Color(0.262745, 0.0901961, 0.0156863, 1)
+theme_override_colors/font_shadow_color = Color(0.419608, 0.164706, 0.0392157, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("2_o5jff")
+theme_override_font_sizes/normal_font_size = 64
+bbcode_enabled = true
+text = "[center]This is text!
+Who knew?
+I hate it.[/center]"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p5ga3")
+}
+
+[node name="Open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_ftxyc")
+
+[node name="Close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_318gk")

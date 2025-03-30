@@ -1,0 +1,65 @@
+[gd_scene load_steps=2 format=3 uid="uid://ivcujcv4dlhb"]
+
+[ext_resource type="Script" uid="uid://uklt5i1wxavp" path="res://credits.gd" id="1_r18jl"]
+
+[node name="credits" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_r18jl")
+new_scene = "res://Scenes/main_menu.tscn"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Button" type="Button" parent="HBoxContainer"]
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+text = "<"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="HBoxContainer"]
+custom_minimum_size = Vector2(1000, 648)
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_font_sizes/normal_font_size = 26
+bbcode_enabled = true
+text = "[center]
+CREDITS:
+
+Beta-aoeng
+Amari
+Amanda 
+Asoeb
+Revati
+Sankalp
+
+Assets:
+\"The Field of the Floating Islands\" by Buch, opengameart.org,
+CCO
+\"Twelve 16x18 RPG character sprites (including NPCs and elementals)\" by Antifarea, opengameart.org, CC-BY 3.0 \"Pixel fonts by Pix3M\" by Pix3M, opengameart.org, CC-BY 3.0 \"Pixel Art Laboratory Props\" by The Leafy Lemur, opengameart.org, CC-BY 3.0
+\"Pixel Art Lab/Office Tiles\" by The Leafy Lemur, opengameart.org, CC-BY 3.0
+
+Sound Effects:
+\"Wood Wobbling & Rattling\" by qubodup, opengameart.org, CCO \"Soundpack 02\" by crazyduckgames, opengameart.org, CCO \"Bad Sound #2\" by remaxim, opengameart.org, CC-BY-SA 3.0, GPL 2.0, GPL 3.0
+\"Keyboard Soundpack #1 [Typing and Single Keystrokes]\" by unicaegames, opengameart.org, CCO
+Music:
+\"The Field Of Dreams\" by pauliuw, opengameart.org, CCO \"Mysterious\" by nene, opengameart.org, CC
+\"Mystical Theme\" by Alexandr Zhelanov, opengameart.org,
+CC-BY-3.0
+
+Custom-Created:
+Key Sprite
+Fence
+Key Icons
+Cursor Stars
+Lights
+Signs
+Char Image
+[/center]"
+
+[connection signal="pressed" from="HBoxContainer/Button" to="." method="_on_button_pressed"]

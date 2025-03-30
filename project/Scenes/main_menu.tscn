@@ -1,0 +1,78 @@
+[gd_scene load_steps=7 format=3 uid="uid://2411t0c3uhoh"]
+
+[ext_resource type="FontFile" uid="uid://cynm5jkabqkef" path="res://Assets/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="1_1cudt"]
+[ext_resource type="Script" uid="uid://ddfth1ddpl0xx" path="res://Scripts/main_menu.gd" id="1_lc4xy"]
+[ext_resource type="Texture2D" uid="uid://p87g0v7hduux" path="res://Assets/Char.png" id="2_opfnp"]
+[ext_resource type="Theme" uid="uid://cbfrsfoupgm4f" path="res://Scenes/button.tres" id="3_717pw"]
+[ext_resource type="PackedScene" uid="uid://cg8vklfvs1g77" path="res://Scenes/transition.tscn" id="4_sosda"]
+[ext_resource type="AudioStream" uid="uid://dxny0jvgcx6qc" path="res://Assets/audio/keypress-029.wav" id="5_ouybo"]
+
+[node name="main-menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_lc4xy")
+
+[node name="Char" type="Sprite2D" parent="."]
+position = Vector2(415.5, 359)
+scale = Vector2(0.628704, 0.572222)
+texture = ExtResource("2_opfnp")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = -39.0
+offset_right = -919.0
+offset_bottom = 39.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="RichTextLabel" type="RichTextLabel" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_constants/line_separation = -90
+theme_override_fonts/normal_font = ExtResource("1_1cudt")
+theme_override_font_sizes/normal_font_size = 291
+text = "CHAR"
+fit_content = true
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -556.0
+offset_right = -40.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 32
+alignment = 1
+
+[node name="play" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_717pw")
+theme_override_fonts/font = ExtResource("1_1cudt")
+theme_override_font_sizes/font_size = 146
+text = "PLAY"
+
+[node name="credits" type="Button" parent="VBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("3_717pw")
+theme_override_fonts/font = ExtResource("1_1cudt")
+theme_override_font_sizes/font_size = 146
+text = "CREDITS"
+
+[node name="transition" parent="." instance=ExtResource("4_sosda")]
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_ouybo")
+
+[connection signal="pressed" from="VBoxContainer2/play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="VBoxContainer2/credits" to="." method="_on_credits_pressed"]

@@ -1,0 +1,196 @@
+[gd_scene load_steps=10 format=3 uid="uid://b1f04dqh7ivte"]
+
+[ext_resource type="Script" uid="uid://c5qa6rppnaxet" path="res://Scripts/dialogue.gd" id="1_ywi5d"]
+[ext_resource type="Texture2D" uid="uid://p87g0v7hduux" path="res://Assets/Char.png" id="2_2er2t"]
+[ext_resource type="FontFile" uid="uid://cynm5jkabqkef" path="res://Assets/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="3_1rf5n"]
+[ext_resource type="AudioStream" uid="uid://dtyccp326v6fb" path="res://Assets/audio/generated-004_medium.wav" id="4_djuvk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_vr385"]
+bg_color = Color(0.105882, 0.0980392, 0.141176, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+shadow_color = Color(0.113725, 0.105882, 0.14902, 1)
+shadow_size = 8
+shadow_offset = Vector2(0, 8)
+
+[sub_resource type="Animation" id="Animation_qk68t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-291, -254), Vector2(-291, -254)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.001),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(340, 520), Vector2(340, 520)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Panel/MarginContainer/Text:visible_ratio")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_qqega"]
+resource_name = "enter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Panel/TextureRect:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-291, -254), Vector2(-249, -225)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Panel:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(340, 520), Vector2(340, 490)]
+}
+
+[sub_resource type="Animation" id="Animation_hhhvo"]
+resource_name = "typing"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Panel/MarginContainer/Text:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7cmqs"]
+_data = {
+&"RESET": SubResource("Animation_qk68t"),
+&"enter": SubResource("Animation_qqega"),
+&"typing": SubResource("Animation_hhhvo")
+}
+
+[node name="dialogue" type="CanvasLayer"]
+script = ExtResource("1_ywi5d")
+
+[node name="Panel" type="Panel" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -236.0
+offset_top = -128.0
+offset_right = 364.0
+offset_bottom = -2.99908
+grow_horizontal = 2
+grow_vertical = 0
+pivot_offset = Vector2(300, 62)
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_vr385")
+
+[node name="TextureRect" type="TextureRect" parent="Panel"]
+layout_mode = 0
+offset_left = -291.0
+offset_top = -254.0
+offset_right = 789.0
+offset_bottom = 826.0
+scale = Vector2(0.364586, 0.364586)
+texture = ExtResource("2_2er2t")
+
+[node name="MarginContainer" type="MarginContainer" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="Text" type="RichTextLabel" parent="Panel/MarginContainer"]
+unique_name_in_owner = true
+modulate = Color(0.796078, 0.780392, 0.85098, 1)
+layout_mode = 2
+theme_override_fonts/normal_font = ExtResource("3_1rf5n")
+theme_override_font_sizes/normal_font_size = 36
+bbcode_enabled = true
+text = "Heyyyyyyyyyyyyyyyyyyyy"
+scroll_active = false
+visible_characters = 0
+visible_ratio = 0.0
+language = "en"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 0)
+
+[node name="Type" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_djuvk")
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+reset_on_save = false
+libraries = {
+"": SubResource("AnimationLibrary_7cmqs")
+}

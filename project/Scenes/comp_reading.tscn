@@ -1,0 +1,137 @@
+[gd_scene load_steps=10 format=3 uid="uid://y61rlfp1ghcy"]
+
+[ext_resource type="Script" uid="uid://cbptdns6n1fwc" path="res://Scripts/comp_reading.gd" id="1_nf36g"]
+[ext_resource type="Texture2D" uid="uid://00x2kq3chvww" path="res://Assets/Signs/computer_screen.png" id="2_ts5js"]
+[ext_resource type="Theme" uid="uid://7yhoae7mpwcv" path="res://Scenes/computer.tres" id="3_6iag8"]
+[ext_resource type="FontFile" uid="uid://cynm5jkabqkef" path="res://Assets/_bitmap_font____romulus_by_pix3m-d6aokem.ttf" id="4_foofr"]
+[ext_resource type="AudioStream" uid="uid://xe1quxhk3g2f" path="res://Assets/audio/start_beep.mp3" id="5_mqvlo"]
+[ext_resource type="AudioStream" uid="uid://xel8evlcw6gp" path="res://Assets/audio/end_beep.mp3" id="6_4p476"]
+
+[sub_resource type="Animation" id="Animation_iyt8o"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(246, 375)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_63l1i"]
+resource_name = "enter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("TextureRect:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(169, 276), Vector2(169, 58)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_p5ga3"]
+_data = {
+&"RESET": SubResource("Animation_iyt8o"),
+&"enter": SubResource("Animation_63l1i")
+}
+
+[node name="reading" type="CanvasLayer"]
+script = ExtResource("1_nf36g")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 246.0
+offset_top = 375.0
+offset_right = 1060.0
+offset_bottom = 965.0
+grow_horizontal = 2
+grow_vertical = 0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+texture = ExtResource("2_ts5js")
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 182.0
+offset_top = 136.0
+offset_right = -153.0
+offset_bottom = -136.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="Text" type="RichTextLabel" parent="TextureRect/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("3_6iag8")
+theme_override_colors/default_color = Color(0.270588, 0.537255, 0.270588, 1)
+theme_override_colors/font_shadow_color = Color(0.223529, 0.298039, 0.223529, 1)
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/normal_font = ExtResource("4_foofr")
+theme_override_font_sizes/normal_font_size = 44
+bbcode_enabled = true
+text = "This is text!
+Who knew?
+I hate it.
+A
+A
+A
+A
+A
+A"
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 1, 1, 0)
+
+[node name="Animation" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_p5ga3")
+}
+
+[node name="Open" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("5_mqvlo")
+
+[node name="Close" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_4p476")
